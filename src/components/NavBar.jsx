@@ -1,15 +1,15 @@
 import GoogleSignin from "../assets/images/image.png";
 import { auth } from "../firebase.js";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
 
 const NavBar = () => {
   const [user] = useAuthState(auth);
 
-
   const googleSignIn = () => {
     const provider = new GoogleAuthProvider();
-    signInWithRedirect(auth, provider);  };
+    signInWithPopup(auth, provider);
+  };
 
   const signOut = () => {
     auth.signOut();
@@ -17,7 +17,7 @@ const NavBar = () => {
 
   return (
     <nav className="nav-bar">
-      <h1>Codezilla Chat</h1>
+      <h1>React Chat</h1>
       {user ? (
         <button onClick={signOut} className="sign-out" type="button">
           Sign Out
